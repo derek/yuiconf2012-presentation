@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>ScrollView Deep Dive</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="">
+		<meta name="author" content="Derek Gathright">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -16,7 +16,8 @@
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/styles/sunburst.css">
+		<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -28,7 +29,7 @@
 		<![endif]-->
 	</head>
 
-	<body>
+	<body onload="prettyPrint()">
 
 		<div class="reveal">
 
@@ -36,63 +37,137 @@
 			<div class="slides">
 
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
+					<h1>YUI ScrollView</h1>
+					<h3>A Deep Dive</h3>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small><a href="http://derek.io">Derek Gathright</a> (<a href="http://twitter.com/derek">@derek</a>)</small>
+					</p>
+					<p>
+						<small>Software Engineer @ Yahoo! - YUI Project</small>
 					</p>
 				</section>
 
 				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
+					<h2>About this talk</h2>
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
+					<br >
+
+					<h4>We're going to cover...</h4>
+					<ul>
+						<li>Architectural overview</li>
+						<li>API (methods, properties, events, etc.)</li>
+						<li>Common implementations</li>
+						<li>Tips, tricks, and gotchas</li>
+					</ul>
+					<br >
+					<br >
+					<h4>Intended Audience</h4>
+					<p>Application developers who wish to provide consistent scrollable interface experiences across all Web-based platforms.</p>
+				</section>
+
+				<section>
+
+					<h2>What is ScrollView?</h2>
+					<p>ScrollView provides a cross-browser scrollable content widget.</p>
+<br />
+					<h2>Supported Browsers</h2>
+					<img border="0" width="500" src="http://edudemic.com/wp-content/uploads/2010/12/browser_logos-256.png">
+					<p>Everything! Modern browsers, as well as legacy (IE6+), Android (2.3+), and mobile Safari.</p>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#/2/1">down</a>.
-						</p>
-						<a href="#/2/1" class="image">
+						<h1>Demos</h1>
 							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
+						<h2>Vertical ScrollView</h2>
+						<iframe height="400" width="400" src="demo01.html"></iframe>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
+						<h2>Horizontal ScrollView</h2>
+						<iframe height="230" width="650" src="demo02.html"></iframe>
 					</section>
 					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+						<h2>Paginated ScrollView</h2>
+						<iframe height="230" width="325" src="demo03.html"></iframe>
 					</section>
 				</section>
 
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview. Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<section>
+						<h1>Y.Widget</h1>
+					</section>
+					<section>
+						<h2>What is it?</h2>
+						<p><code>Y.Widget</code> is a foundation class that many UI components in YUI are built on top of.</p>
+					</section>
+					<section>
+						<h2>What does it provide?</h2>
+						<ul>
+							<li>Events, Attributes, &amp; Plugins</li>
+							<li>Render Lifecycle Methods</li>
+							<li>Abstract Rendering Methods</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Architecture</h2>
+						<img src="http://yuilibrary.com/yui/docs/assets/widget/widget-class-diagram.png">
+					</section>
+
+					<section>
+						<h2>Abstract Rendering methods</h2>
+						<img src="http://yuilibrary.com/yui/docs/assets/widget/widget-template-diagram.png">
+					</section>
+
+					<section>
+						<h2>Extending Widget</h2>
+<pre class="prettyprint" style="font-size:20px;">/* MyWidget class constructor */
+function MyWidget(config) {
+    MyWidget.superclass.constructor.apply(this, arguments);
+}
+
+/* Identify the Widget class */
+MyWidget.NAME = "MyWidget";
+
+MyWidget.ATTRS = {
+    // Attributes defined w/ default values and get/set functions
+};
+
+Y.extend(MyWidget, Y.Widget, {
+    // Methods/properties to add to the prototype of the new class
+});
+</pre>
+					</section>
 				</section>
+
+				<section>
+					<h2>Instantiating ScrollView</h2>
+<pre style="font-size:28px;"><code>
+YUI().use('scrollview', function (Y) {
+
+	var scrollView = new Y.ScrollView({
+		srcNode: '#someContainer',
+		height: 400
+	});
+
+	scrollView.render();
+});
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Modules</h2>
+					<ul>
+						<li>scrollview</li>
+						<li>scrollview-base</li>
+						<li>scrollview-scrollbars</li>
+						<li>scrollview-paginator</li>
+					</ul>
+				</section>
+
 
 				<section>
 					<h2>rvl.io</h2>
