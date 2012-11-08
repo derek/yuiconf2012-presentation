@@ -106,11 +106,7 @@
 					</section>
 					<section>
 						<h2>Horizontal ScrollView</h2>
-						<iframe height="230" width="650" src="demo02.html"></iframe>
-					</section>
-					<section>
-						<h2>Paginated ScrollView</h2>
-						<iframe height="270" width="325" src="demo03.html"></iframe>
+            <iframe height="230" width="325" src="demo02.html"></iframe>
 					</section>
 					<section>
 						<h2>Kitten Refresher</h2>
@@ -259,6 +255,182 @@ scrollView.on('scrollEnd', fn);
 				</section>
 
 
+
+
+
+
+
+
+        <section>
+          <section>
+            <h1>Configuring ScrollView</h1>
+          </section>
+          <section>
+            <h2>Basic</h2>
+<pre class="prettyprint" style="font-size:20px;">
+YUI().use('scrollview', function (Y) {
+  
+  var scrollView = new Y.ScrollView({
+    srcNode: '#container',
+    height: 400,
+
+    axis: 'x', // 'x', 'y', or 'xy' (added in 3.7)
+    flick: {
+        minDistance:10,
+        minVelocity:0.3,
+        axis: "x"
+    }
+
+  });
+
+  scrollView.render();
+
+});
+</pre>
+          </section>
+          <section>
+            <h2>No flick</h2>
+<pre class="prettyprint" style="font-size:20px;">
+YUI().use('scrollview', function (Y) {
+  
+  var scrollView = new Y.ScrollView({
+    srcNode: '#container',
+    height: 400,
+
+    flick: false
+
+  });
+
+  scrollView.render();
+
+});
+</pre>
+          </section>
+          <section>
+            <h2>Tweaking Physics</h2>
+<pre class="prettyprint" style="font-size:20px;">
+YUI().use('scrollview', function (Y) {
+  
+  var scrollView = new Y.ScrollView({
+    srcNode: '#container',
+    height: 400,
+
+    frameDuration: 5, // default '15'
+    deceleration: 0.99, // default '0.93'
+    easing: 'cubic-bezier(0,1,0,1)' // 'cubic-bezier(0,.1,0,1)'
+
+  });
+
+  scrollView.render();
+
+});
+</pre>
+          </section>
+        </section>
+
+
+
+
+
+
+
+        <section>
+          <section>
+            <h1>Paginator Plugin</h1>
+            <p><code>Y.Plugin.ScrollViewPaginator</code> plugin adds pagination support, so that ScrollView will snap to discrete page boundaries, as opposed to scrolling continuously.</p>
+            <br />
+            <div style="margin-left:100px;">
+              <div style="float:left;">
+                <h3>Attributes</h3>
+                <ul>
+                  <li>axis</li>
+                  <li>selector</li>
+                  <li>index</li>
+                  <li>total</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Methods</h3>
+                <ul>
+                  <li>scrollToIndex()</li>
+                  <li>next()</li>
+                  <li>prev()</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Instantiation</h2>
+
+<pre class="prettyprint">YUI().use("scrollview", "scrollview-paginator", function(Y) {
+    var scrollview = new Y.ScrollView({
+        srcNode:"#container",
+        height:"400"
+    });
+
+    /* Plug in pagination support */
+    scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+        selector: ">li" // elements definining page boundaries
+    });
+
+    scrollview.render();
+});
+</pre>
+<pre class="prettyprint">
+/* scrollview.pages is an instance of 
+   the ScrollViewPaginator plugin */
+scrollview.pages.set("index", 3);
+scrollview.pages.scrollTo(3, 500, "ease-in");
+scrollview.pages.next();
+scrollview.pages.get("total");
+</pre>
+          </section>
+
+          <section>
+            <h2>Horizontal ScrollView</h2>
+            <iframe height="230" width="325" src="demo02.html"></iframe>
+          </section>
+          <section>
+            <h2>Paginated ScrollView</h2>
+            <iframe height="270" width="325" src="demo03.html"></iframe>
+          </section>
+        </section>
+
+
+
+
+
+
+
+
+
+
+        <section>
+          <section>
+            <h1>Tips &amp; Tricks</h1>
+            <img height="220" src="http://www.chiropracticlifeblog.com/wp-content/uploads/2009/06/one-way-sign2.jpg">
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>DOM Optimization</h2>
+            <p><strong>Problem</strong>: ScrollView-based applications do not require page changes to load new content, so it becomes easy to max out the GPU memory on memory-restricted mobile devices.</p>
+            <br />
+            <p><strong>Solution</strong>: Remove distant content from the rendering tree.</p>
+          </section>
+          <section>
+            <h2>How?</h2>
+<pre class="prettyprint">scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+  selector: ">li",
+  _optimizeMemory: true
+});
+</pre>
+          </section>
+          <section>
+            <h2>Demo</h2>
+            <iframe height="270" width="325" src="demo05.html"></iframe>
+          </section>
+        </section>
 				<section>
 					<h1>Thanks!</h1>
 <br />
@@ -266,7 +438,7 @@ scrollView.on('scrollEnd', fn);
 <br />
 					<p>Slides <br /> <a href="https://github.com/derek/yuiconf2012-presentation">github.com/derek/yuiconf2012-presentation</a></p>
 <br />
-					<p>Follow me <br /> <a href="http://twitter.com/derek">@derek</a></p>
+					<p>Holla! <br /> <a href="http://twitter.com/derek">@derek</a></p>
 				</section>
 
 			</div>
@@ -293,7 +465,6 @@ scrollView.on('scrollEnd', fn);
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
