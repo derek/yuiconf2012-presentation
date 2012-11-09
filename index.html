@@ -401,22 +401,82 @@ scrollview.pages.get("total");
 
 
 
+        <section>
+          <section>
+            <h1>Unit Testing</h1>
+            <img width="496" src="https://www.evernote.com/shard/s1/sh/2f18c73d-f2fa-4ac2-8648-a5e4bec6c5fb/aa1f96c3a0af7e7cb612694fc0bf3df7/res/5fee0b50-96a2-4d66-a7bc-89342feb9b37/captionater_%7C_quickmeme-20121108-161518.jpg.jpg?resizeSmall&width=832">
+          </section>
+          <section>
+            <h2>Unit Testing</h2>
+            <p>ScrollView was not unit tested until 3.7 release.</p>
+            <br />
+            <p>Reason for delay?  No way to simulate gestures until <code>gesture-simulate</code> landed in 3.7.</p>
+            <br />
+            <p>Coverage now 80+% on <code>scrollview-base</code> and <code>scrollview-paginator</code>. Increasing.</p>
+            <br />
+            <p>See: yui3/src/scrollview/tests/unit/</p>
+          </section>
+          <section>
+            <h2>Example test</h2>
+<pre class="prettyprint">"Move on Y should move that distance": function() {
+    var Test = this,
+        scrollview = renderVerticalScrollview(),
+        distance = 500;
+      
+    scrollview.on('scrollEnd', function(){
+        Test.resume(function(){
+            if (scrollview.get('scrollY') >= distance) {
+                Y.Assert.pass();
+            } else {
+                Y.Assert.fail();
+            }
+        });
+    });
+
+    scrollview.get('contentBox').simulateGesture('move', {
+        path: { ydist: -(distance) },
+        duration: 100
+    });
+
+    Test.wait(2000);
+}</pre>
+          </section>
+          <section>
+              <h2>simulate-gesture</h2>
+              <p>Still very young, but it works, and it's awesome.</p>
+              <p>No user guide documentation yet, so the best documentation is the source code @ <a href="https://github.com/yui/yui3/blob/master/src/gesture-simulate/js/gesture-simulate.js">yui3/src/gesture-simulate/js/gesture-simulate.js</a></p>
+          </section>
+        </section>
+
+
+
+
+
+
+
 
 
 
 
         <section>
           <section>
-            <h1>Tips &amp; Tricks</h1>
+            <h1>Tips, Tricks, &amp; Q's</h1>
             <img height="220" src="http://www.chiropracticlifeblog.com/wp-content/uploads/2009/06/one-way-sign2.jpg">
           </section>
         </section>
+
+
+
+
         <section>
           <section>
             <h2>DOM Optimization</h2>
             <p><strong>Problem</strong>: ScrollView-based applications do not require page changes to load new content, so it becomes easy to max out the GPU memory on memory-restricted mobile devices.</p>
             <br />
-            <p><strong>Solution</strong>: Remove distant content from the rendering tree.</p>
+            <div class="fragment">
+              <p><strong>Solution</strong>: Remove distant content from the rendering tree.</p>
+            </div>
+            
           </section>
           <section>
             <h2>How?</h2>
@@ -431,6 +491,33 @@ scrollview.pages.get("total");
             <iframe height="270" width="325" src="demo05.html"></iframe>
           </section>
         </section>
+
+
+
+        <section>
+          <section>
+            <h2>Lazy Loading</h2>
+            <p><strong>Problem</strong>: On render, ScrollView will auto-calculate its min/max bounds and pagination offsets (if applicable).  If widget content changes size, it may modify the container's height or width which will cause it to be out of sync.</p>
+            <br />
+            <div class="fragment">
+              <p><strong>Solution</strong>: Execute scrollView.syncUI() <strong>anytime</strong> you modify the size of the size of content inside ScrollView.</p>
+              <pre class="prettyprint">// Recalculate container and page dimensions
+scrollView.syncUI();</pre>
+            </div>
+          </section>
+        </section>
+
+
+
+        <section>
+          <section>
+            <h2>Debugging</h2>
+          </section>
+        </section>
+
+
+
+
 				<section>
 					<h1>Thanks!</h1>
 <br />
