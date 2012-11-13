@@ -591,6 +591,18 @@ scrollView.syncUI();</pre>
 </pre>
             </div>
           </section>
+          <section>
+            <h2>Dual-axis continuous</h2>
+            <iframe height="404" width="404" src="demo-dual.html"></iframe>
+          </section>
+          <section>
+            <h2>Dual-axis paginated</h2>
+            <iframe height="404" width="404" src="demo-dual-paginated.html"></iframe>
+          </section>
+          <section>
+            <h2>Dual-axis paginated vertical</h2>
+            <iframe height="400" width="400" src="demo-dual-paginated-vertical.html"></iframe>
+          </section>
         </section>
 
 
@@ -598,8 +610,24 @@ scrollView.syncUI();</pre>
         <section>
           <section>
             <h2>Debugging</h2>
-          </section>
+          <ul>
+            <li>Get familiar with Chrome Dev Tools, Web Inspector, Firebug, etc.</li>
+            <li>Use Chrome to live edit code and export your ScrollView instance as a global
+              <pre>
+var scrollView = new Y.ScrollView({...});
+window.sv = scrollView; // Globalize it
+              </pre>
+              Now you can interact with ScrollView from the console.
+            </li>
+            <li>Interesting: <code>_minScroll{X/Y}</code>, <code>_maxScroll{X/Y}</code>, <code>_isOutOfBounds()</code></li>
+          </ul>
         </section>
+        </section>
+
+
+
+
+        <section>
 
 
 
