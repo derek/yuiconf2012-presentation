@@ -51,6 +51,10 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
+
+
+
+
 				<section>
 					<h1>YUI ScrollView</h1>
 					<h3>A Deep Dive</h3>
@@ -61,6 +65,11 @@
 						<small>Software Engineer @ Yahoo! - YUI Project</small>
 					</p>
 				</section>
+
+
+
+
+
 
 				<section>
 					<h2>About this talk</h2>
@@ -80,34 +89,47 @@
 					<p>Application developers who wish to provide consistent scrollable interface experiences across all Web-based platforms.</p>
 				</section>
 
-				<section>
 
+
+
+
+				<section>
 					<h2>What is ScrollView?</h2>
-					<p>ScrollView provides a cross-browser scrollable content widget.</p>
+					<p>ScrollView provides a cross-browser scrollable content widget. Useful for overflow content (lists, carousels) in addition to more advanced interface experiences.</p>
 <br />
-					<h2>Supported Browsers</h2>
-					<img border="0" width="500" src="http://edudemic.com/wp-content/uploads/2010/12/browser_logos-256.png">
-					<p>Everything! Modern browsers, as well as legacy (IE6+), Android (2.3+), and mobile Safari.</p>
+          <div class="fragment">
+  					<h2>Supported Browsers</h2>
+  					<img border="0" width="500" src="http://edudemic.com/wp-content/uploads/2010/12/browser_logos-256.png">
+  					<p>Everything! Modern browsers, as well as legacy browsers (IE6+), Mobile Safari, Android, etc.</p>
+          </div>
 				</section>
 
-				<!-- Example of nested vertical slides -->
+
+
+
+
+
 				<section>
 					<section>
 						<h1>Demos</h1>
 							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
 					</section>
+
           <section>
             <h2>No ScrollView</h2>
             <iframe height="400" width="400" src="demo00.html"></iframe>
           </section>
+
 					<section>
-						<h2>Vertical ScrollView</h2>
+						<h2>With ScrollView</h2>
 						<iframe height="400" width="400" src="demo01.html"></iframe>
 					</section>
+
 					<section>
 						<h2>Horizontal ScrollView</h2>
             <iframe height="230" width="325" src="demo02.html"></iframe>
 					</section>
+
 					<section>
 						<h2>Kitten Refresher</h2>
 						<iframe height="520" width="320" src="file:///Users/drg/src/yui/yui3/src/scrollview/tests/manual/scrollview-ptr.html"></iframe>
@@ -118,32 +140,75 @@
 					</section>-->
 				</section>
 
+
+
+
+
+
 				<section>
+          <section>
+            <h1>Architecture</h1>
+            <p>yui3/src/scrollview/meta/scrollview.json</p>
+            <pre class="prettyprint">
+"scrollview-base" : { // Y.ScrollView
+    "requires" : [
+        "widget",
+        "event-gestures",
+        "event-mousewheel",
+        "transition"
+    ]
+},
+"scrollview-scrollbars":{...}, // Y.Plugin.ScrollViewScrollbars
+"scrollview-paginator":{...}, // Y.Plugin.ScrollViewPaginator
+"scrollview-base-ie":{...},
+"scrollview-list":{...}</pre>
+          </section>
 					<section>
-						<h1>Y.Widget</h1>
-					</section>
-					<section>
-						<h2>What is it?</h2>
+            <h2>Y.Widget</h2>
 						<p><code>Y.Widget</code> is a foundation class that many UI components in YUI are built on top of.</p>
+<br />
+            <h3>Core Widgets</h3>
+            <ul class="twocolumn">
+              <li>AutoComplete</li>
+              <li>Button</li>
+              <li>Calendar</li>
+              <li>Charts</li>
+              <li>DataTable</li>
+              <li>Dial</li>
+              <li>MenuNav</li>
+              <li>Node Plugin</li>
+              <li>Overlay</li>
+              <li>Panel</li>
+              <li style="color:yellow; font-weight:bold;">ScrollView</li>
+              <li>Slider</li>
+              <li>TabView</li>
+            </ul>
 					</section>
+
 					<section>
-						<h2>What does it provide?</h2>
+						<h2>Y.Widget provides</h2>
 						<ul>
-							<li>Events, Attributes, &amp; Plugins</li>
+              <li>Attributes</li>
+              <li>EventTarget (Custom Events)</li>
+              <li>Plugability</li>
 							<li>Render Lifecycle Methods</li>
 							<li>Abstract Rendering Methods</li>
+              <li>... and more</li>
 						</ul>
+            <br/>
+            <br/>
+            <p>Docs @ <a href="http://yuilibrary.com/yui/docs/widget/">yuilibrary.com/yui/docs/widget/</a></p>
 					</section>
 
-					<section>
+<!-- 					<section>
 						<h2>Architecture</h2>
 						<img src="http://yuilibrary.com/yui/docs/assets/widget/widget-class-diagram.png">
-					</section>
+					</section> -->
 
-					<section>
+<!-- 					<section>
 						<h2>Abstract Rendering methods</h2>
 						<img src="http://yuilibrary.com/yui/docs/assets/widget/widget-template-diagram.png">
-					</section>
+					</section> -->
 
 					<section>
 						<h2>Extending Widget</h2>
@@ -159,19 +224,20 @@ MyWidget.ATTRS = {
     // Attributes defined w/ default values & get/set functions
 };
 
+/* Extend and export the Y.MyWidget class */
 Y.MyWidget = Y.extend(MyWidget, Y.Widget, {
     // Methods/properties to add to the prototype of new class
 });
 </pre>
 					</section>
+
 					<section>
 						<h2>Instantiating MyWidget</h2>
 <pre class="prettyprint" style="font-size:20px;">
-YUI().use('myWidget', function (Y) {
+YUI({...}).use('myWidget', function (Y) {
 	
   var myWidget = new Y.MyWidget({
-    srcNode: '#someContainer',
-    height: 400
+    srcNode: '#someContainer'
   });
 
   myWidget.render();
@@ -179,6 +245,7 @@ YUI().use('myWidget', function (Y) {
 });
 </pre>
 					</section>
+
 					<section>
 						<h2>Instantiating ScrollView</h2>
 <pre class="prettyprint" style="font-size:20px;">
@@ -194,64 +261,46 @@ YUI().use('scrollview', function (Y) {
 });
 </pre>
 					</section>
-				</section>
+        </section>
 
-				<section>
-					<h2>Modules</h2>
-					<ul>
-            <li>
-              <p>scrollview</p>
-              <ul><li>Rollup: scrollview-base + scrollview-scrollbars</li></ul>
-            </li>
-						<li>
-							<p>scrollview-base</p>
-							<ul><li><code>Y.ScrollView</code></li></ul>
-						</li>
-						<li>
-							<p>scrollview-scrollbars</p>
-							<ul><li><code>Y.Plugin.ScrollViewScrollbars</code></li></ul>
-						</li>
-						<li>
-							<p>scrollview-paginator</p>
-							<ul><li><code>Y.Plugin.ScrollViewPaginator</code></li></ul>
-						</li>
-					</ul>
-				</section>
+        <section>
+          <section>
+            <h1>ScrollView API</h1>
+          </section>
+  				<section>
+  					<h2>ScrollView Methods, Properties, &amp; Events</h2>
+  					<p>Inherits from <code>Y.Widget</code>, and also includes:</p>
+  					<p><pre class="prettyprint" style="font-size:25px;">
+  // scrollTo(x,y,[duration],[easing]) 
+  scrollView.scrollTo(0, 100, 500, 'ease-out');
 
-				<section>
-					<h2>Methods, Properties,  &amp; Events</h2>
-					<p>Inherits from <code>Y.Widget</code>, and also includes:</p>
-					<p><pre class="prettyprint" style="font-size:25px;">// Scroll to a specific offset
-// scrollTo(x,y,[duration],[easing]) 
-scrollView.scrollTo(0, 100, 500, 'ease-out');
+  // Retrieve the last scrolled amount
+  scrollView.lastScrolledAmt; // 100
 
-// Retrieve the last scrolled amount
-scrollView.lastScrolledAmt; // 100
-
-// Be notified when scrolling stops
-scrollView.on('scrollEnd', fn);
-</pre></p>
-				</section>
+  // Be notified when scrolling stops
+  scrollView.on('scrollEnd', fn);</pre></p>
+  				</section>
 
 
-				<section>
-					<h2>Attributes</h2>
-					<p>Inherits from <code>Y.Widget</code>, and also includes:</p>
-					<ul class="twocolumn">
-						<li class="yellow">axis</li>
-						<li>bounce</li>
-						<li>bounceRange</li>
-						<li>deceleration</li>
-						<li>drag</li>
-						<li>duration</li>
-						<li>easing</li>
-						<li class="yellow">flick</li>
-						<li>frameDuration</li>
-						<li class="yellow">scrollX</li>
-						<li class="yellow">scrollY</li>
-						<li>snapDuration</li>
-						<li>snapEasing</li>
-					</ul>
+  				<section>
+  					<h2>ScrollView Attributes</h2>
+  					<p>Inherits from <code>Y.Widget</code>, and also includes:</p>
+  					<ul class="twocolumn">
+  						<li class="yellow">axis</li>
+  						<li>bounce</li>
+  						<li>bounceRange</li>
+  						<li>deceleration</li>
+  						<li>drag</li>
+  						<li>duration</li>
+  						<li>easing</li>
+  						<li class="yellow">flick</li>
+  						<li>frameDuration</li>
+  						<li class="yellow">scrollX</li>
+  						<li class="yellow">scrollY</li>
+  						<li>snapDuration</li>
+  						<li>snapEasing</li>
+  					</ul>
+          </section>
 				</section>
 
 
@@ -268,63 +317,66 @@ scrollView.on('scrollEnd', fn);
           <section>
             <h2>Basic</h2>
 <pre class="prettyprint" style="font-size:20px;">
-YUI().use('scrollview', function (Y) {
-  
-  var scrollView = new Y.ScrollView({
-    srcNode: '#container',
-    height: 400,
+var scrollView = new Y.ScrollView({
 
-    axis: 'x', // 'x', 'y', or 'xy' (added in 3.7)
-    flick: {
-        minDistance:10,
-        minVelocity:0.3,
-        axis: "x"
-    }
+  srcNode: '#container',
+  height: 400,
 
-  });
-
-  scrollView.render();
+  axis: 'x', // 'x', 'y', or 'xy' (added in 3.7)
+  flick: {
+      minDistance:10,
+      minVelocity:0.3,
+      axis: "x"
+  }
 
 });
+
+scrollView.render();
 </pre>
           </section>
           <section>
             <h2>No flick</h2>
 <pre class="prettyprint" style="font-size:20px;">
-YUI().use('scrollview', function (Y) {
-  
-  var scrollView = new Y.ScrollView({
-    srcNode: '#container',
-    height: 400,
+var scrollView = new Y.ScrollView({
 
-    flick: false
+  srcNode: '#container',
+  height: 400,
 
-  });
-
-  scrollView.render();
+  flick: false
 
 });
+
+scrollView.render();
 </pre>
           </section>
           <section>
             <h2>Tweaking Physics</h2>
 <pre class="prettyprint" style="font-size:20px;">
-YUI().use('scrollview', function (Y) {
-  
-  var scrollView = new Y.ScrollView({
-    srcNode: '#container',
-    height: 400,
+var scrollView = new Y.ScrollView({
 
-    frameDuration: 5, // default '15'
-    deceleration: 0.99, // default '0.93'
-    easing: 'cubic-bezier(0,1,0,1)' // 'cubic-bezier(0,.1,0,1)'
+  srcNode: '#container',
+  height: 400,
 
-  });
-
-  scrollView.render();
+  frameDuration: 5, // ms between frames. default '15'
+  deceleration: 0.99, // default '0.93'
+  easing: 'cubic-bezier(0,.2,0,1)' // 'cubic-bezier(0,.1,0,1)'
 
 });
+
+scrollView.render();
 </pre>
+          </section>
+          <section>
+            <h2>Bézier Curves</h2>
+            <p>CSS3 Transitions add support for cubic curves. Normalized by YUI's <code>transition</code> module. P0 is (0,0) and P3 is (1,1), so you define P1, P2, &amp; duration</p>
+            <img width="300" src="http://upload.wikimedia.org/wikipedia/commons/f/ff/Bezier_3_big.gif">
+<pre class="prettyprint" style="font-size:20px;">
+// Examples
+(0.0, 0.0, 1.0, 1.0) // linear
+(0.42, 0.0, 1.0, 1.0) // ease-in
+(0.0, 0.0, 0.58, 1.0) // ease-out
+</pre>
+          <aside>(Useful: <a href="http://www.roblaplaca.com/examples/bezierBuilder/">CSS cubic-bezier builder</a>)</aside>
           </section>
         </section>
 
@@ -337,7 +389,7 @@ YUI().use('scrollview', function (Y) {
         <section>
           <section>
             <h1>Paginator Plugin</h1>
-            <p><code>Y.Plugin.ScrollViewPaginator</code> plugin adds pagination support, so that ScrollView will snap to discrete page boundaries, as opposed to scrolling continuously.</p>
+            <p><code>Y.Plugin.ScrollViewPaginator</code> plugin adds pagination support so ScrollView will snap to discrete page boundaries, as opposed to scrolling continuously.</p>
             <br />
             <div style="margin-left:100px;">
               <div style="float:left;">
@@ -387,7 +439,7 @@ scrollview.pages.get("total");
           </section>
 
           <section>
-            <h2>Horizontal ScrollView</h2>
+            <h2>Continuous ScrollView</h2>
             <iframe height="230" width="325" src="demo02.html"></iframe>
           </section>
           <section>
@@ -410,11 +462,11 @@ scrollview.pages.get("total");
             <h2>Unit Testing</h2>
             <p>ScrollView was not unit tested until 3.7 release.</p>
             <br />
-            <p>Reason for delay?  No way to simulate gestures until <code>gesture-simulate</code> landed in 3.7.</p>
+            <p>Reason for delay?  No way to simulate gestures until <code>gesture-simulate</code> landed.</p>
             <br />
             <p>Coverage now 80+% on <code>scrollview-base</code> and <code>scrollview-paginator</code>. Increasing.</p>
             <br />
-            <p>See: yui3/src/scrollview/tests/unit/</p>
+            <p>Tests @ yui3/src/scrollview/tests/unit/</p>
           </section>
           <section>
             <h2>Example test</h2>
@@ -435,7 +487,7 @@ scrollview.pages.get("total");
 
     scrollview.get('contentBox').simulateGesture('move', {
         path: { ydist: -(distance) },
-        duration: 100
+        duration: 100 // milliseconds
     });
 
     Test.wait(2000);
@@ -444,7 +496,7 @@ scrollview.pages.get("total");
           <section>
               <h2>simulate-gesture</h2>
               <p>Still very young, but it works, and it's awesome.</p>
-              <p>No user guide documentation yet, so the best documentation is the source code @ <a href="https://github.com/yui/yui3/blob/master/src/gesture-simulate/js/gesture-simulate.js">yui3/src/gesture-simulate/js/gesture-simulate.js</a></p>
+              <p>No user guide documentation yet, so the best documentation is the source code. <a href="https://github.com/yui/yui3/blob/master/src/gesture-simulate/js/gesture-simulate.js">yui3/src/gesture-simulate/js/gesture-simulate.js</a></p>
           </section>
         </section>
 
@@ -475,14 +527,22 @@ scrollview.pages.get("total");
             <br />
             <div class="fragment">
               <p><strong>Solution</strong>: Remove distant content from the rendering tree.</p>
+              <pre class="prettyprint">
+scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+    selector: ">li",
+    _optimizeMemory: true
+});
+              </pre>
             </div>
             
           </section>
           <section>
             <h2>How?</h2>
-<pre class="prettyprint">scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+<pre class="prettyprint">var scrollview = new Y.ScrollView({...});
+  
+scrollview.plug(Y.Plugin.ScrollViewPaginator, {
   selector: ">li",
-  _optimizeMemory: true
+  _optimizeMemory: true // <-----------
 });
 </pre>
           </section>
@@ -500,9 +560,35 @@ scrollview.pages.get("total");
             <p><strong>Problem</strong>: On render, ScrollView will auto-calculate its min/max bounds and pagination offsets (if applicable).  If widget content changes size, it may modify the container's height or width which will cause it to be out of sync.</p>
             <br />
             <div class="fragment">
-              <p><strong>Solution</strong>: Execute scrollView.syncUI() <strong>anytime</strong> you modify the size of the size of content inside ScrollView.</p>
+              <p><strong>Solution</strong>: Execute scrollView.syncUI() <strong>anytime</strong> you modify the size of content inside ScrollView.</p>
               <pre class="prettyprint">// Recalculate container and page dimensions
 scrollView.syncUI();</pre>
+            </div>
+          </section>
+        </section>
+
+
+
+
+        <section>
+          <section>
+            <h2>Nested ScrollViews</h2>
+            <p><strong>Problem</strong>: I want a ScrollView of ScrollViews</p>
+            <br />
+            <div class="fragment">
+              <p><strong>Solution</strong>: No you don't.  You want a ScrollView that supports scrolling on the X and Y axes, which ScrollView now supports.</p>
+<pre class="prettyprint">new Y.ScrollView({
+  srcNode:'#container',
+  height:'400',
+  axis: 'xy' // <---------
+  plugins: [{
+    fn:Y.Plugin.ScrollViewPaginator, 
+    cfg:{
+      selector:'>li',
+      axis: 'x' // <---------
+    }}]
+}).render();
+</pre>
             </div>
           </section>
         </section>
@@ -512,6 +598,22 @@ scrollView.syncUI();</pre>
         <section>
           <section>
             <h2>Debugging</h2>
+          </section>
+        </section>
+
+
+
+
+        <section>
+          <section>
+            <h1>What's next?</h1>
+            <ul>
+              <li class="fragment">Improved coverage on functional &amp; unit tests.</li>
+              <li class="fragment">Memory optimization on by default</li>
+              <li class="fragment">CSS animated flicks (<a href="https://github.com/derek/yui3/blob/sv_flick_perf/src/scrollview/js/scrollview-base.js#L744">source</a>, <a href="http://derek.io/~/yui/branch/sv_flick_perf/src/scrollview/tests/manual/svtestbed.html">demo</a>)</li>
+              <li class="fragment"><code>webkit-overflow-scrolling:touch</code> ?</li>
+              <li class="fragment">Out of beta!</li>
+            </ul>
           </section>
         </section>
 
