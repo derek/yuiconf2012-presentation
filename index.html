@@ -100,7 +100,7 @@
           <div class="fragment">
   					<h2>Supported Browsers</h2>
   					<img border="0" width="500" src="http://edudemic.com/wp-content/uploads/2010/12/browser_logos-256.png">
-  					<p>Everything! Modern browsers, as well as legacy browsers (IE6+), Mobile Safari, Android, etc.</p>
+  					<p>Everything! Modern browsers, legacy (IE6+), <br> mobile (Safari, Android), etc.</p>
           </div>
 				</section>
 
@@ -568,6 +568,18 @@ scrollView.syncUI();</pre>
         </section>
 
 
+        <section>
+          <section>
+            <h2>Right to Left Layouts</h2>
+            <p><strong>Problem</strong>: My target audience requires a right-to-left layout. How can I hack ScrollView to support that?</p>
+            <br />
+            <div class="fragment">
+              <p><strong>Solution</strong>: You don't! As of YUI 3.7, ScrollView and its paginator plugin natively support RTL layouts.</p>
+            </div>
+          </section>
+        </section>
+
+
 
 
         <section>
@@ -619,7 +631,7 @@ window.sv = scrollView; // Globalize it
               </pre>
               Now you can interact with ScrollView from the console.
             </li>
-            <li>Interesting: <code>_minScroll{X/Y}</code>, <code>_maxScroll{X/Y}</code>, <code>_isOutOfBounds()</code></li>
+            <li>Interesting stuff: <code>get('scroll{X/Y}')</code>, <code>_minScroll{X/Y}</code>, <code>_maxScroll{X/Y}</code>, <code>_isOutOfBounds()</code>, <code>pages._pageDims</code></li>
           </ul>
         </section>
         </section>
