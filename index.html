@@ -43,7 +43,8 @@
 			}
 
       body {
-        background: #2c2f3f;
+       /* background: #2c2f3f;
+        background: -webkit-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);*/
       }
 		</style>
 	</head>
@@ -59,9 +60,13 @@
 
 
 
+        <section>
 				<section>
 					<h1>YUI ScrollView</h1>
-					<h3>A Deep Dive</h3>
+					<h2>Deep Dive</h2>
+          <p>
+            <small>YUIConf 2012 - Santa Clara, CA</small>
+          </p>
 					<p>
 						<small><a href="http://derek.io">Derek Gathright</a> (<a href="http://twitter.com/derek">@derek</a>)</small>
 					</p>
@@ -108,6 +113,7 @@
   					<img border="0" width="500" src="http://edudemic.com/wp-content/uploads/2010/12/browser_logos-256.png">
   					<p>Everything! Modern browsers, legacy (IE6+), <br> mobile (Safari, Android), etc.</p>
           </div>
+        </section>
 				</section>
 
 
@@ -123,22 +129,22 @@
 
           <section>
             <h2>No ScrollView</h2>
-            <iframe height="400" width="400" src="demo00.html"></iframe>
+            <iframe height="400" width="400" src="assets/demo00.html"></iframe>
           </section>
 
 					<section>
 						<h2>With ScrollView</h2>
-						<iframe height="400" width="400" src="demo01.html"></iframe>
+						<iframe height="400" width="400" src="assets/demo01.html"></iframe>
 					</section>
 
 					<section>
 						<h2>Horizontal ScrollView</h2>
-            <iframe height="230" width="400" src="demo02.html"></iframe>
+            <iframe height="230" width="400" src="assets/demo02.html"></iframe>
 					</section>
 
 					<section>
 						<h2>Kitten Refresher</h2>
-						<iframe height="520" width="320" src="file:///Users/drg/src/yui/yui3/src/scrollview/tests/manual/scrollview-ptr.html"></iframe>
+						<iframe height="520" width="320" src="assets/demo-ptr.html"></iframe>
 					</section>
 					<!--<section>
 						<h2>Election 2012</h2>
@@ -445,11 +451,11 @@ scrollview.pages.next();
 
           <section>
             <h2>Continuous ScrollView</h2>
-            <iframe height="230" width="325" src="demo02.html"></iframe>
+            <iframe height="230" width="325" src="assets/demo02.html"></iframe>
           </section>
           <section>
             <h2>Paginated ScrollView</h2>
-            <iframe height="270" width="325" src="demo03.html"></iframe>
+            <iframe height="270" width="325" src="assets/demo03.html"></iframe>
           </section>
         </section>
 
@@ -543,7 +549,7 @@ scrollview.plug(Y.Plugin.ScrollViewPaginator, {
           </section>
           <section>
             <h2>Demo</h2>
-            <iframe height="270" width="325" src="demo05.html"></iframe>
+            <iframe height="270" width="325" src="assets/demo05.html"></iframe>
           </section>
         </section>
 
@@ -588,7 +594,7 @@ scrollView.syncUI();</pre>
           </section>
           <section>
             <h2>Dual-axis continuous</h2>
-            <iframe height="404" width="404" src="demo-dual.html"></iframe>
+            <iframe height="404" width="404" src="assets/demo-dual.html"></iframe>
 <pre class="prettyprint">new Y.ScrollView({
   srcNode:'#container',
   axis: 'xy'
@@ -597,7 +603,7 @@ scrollView.syncUI();</pre>
           </section>
           <section>
             <h2>Dual-axis paginated</h2>
-            <iframe height="404" width="404" src="demo-dual-paginated.html"></iframe>
+            <iframe height="404" width="404" src="assets/demo-dual-paginated.html"></iframe>
 <pre class="prettyprint">scrollview.plug(Y.Plugin.ScrollViewPaginator, {
   selector: ">li",
   axis:"x"
@@ -606,7 +612,7 @@ scrollView.syncUI();</pre>
           </section>
           <section>
             <h2>Dual-axis paginated vertical</h2>
-            <iframe height="400" width="400" src="demo-dual-paginated-vertical.html"></iframe>
+            <iframe height="400" width="400" src="assets/demo-dual-paginated-vertical.html"></iframe>
           </section>
         </section>
 
@@ -688,7 +694,9 @@ window.sv = scrollView; // Globalize it
 					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '/socket.io/socket.io.js', async: true },
+          { src: 'plugin/notes-server/client.js', async: true }
 				]
 			});
 

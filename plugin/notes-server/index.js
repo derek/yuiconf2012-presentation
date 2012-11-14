@@ -1,3 +1,4 @@
+
 var express   = require('express');
 var fs        = require('fs');
 var io        = require('socket.io');
@@ -24,7 +25,7 @@ io.sockets.on('connection', function(socket) {
 });
 
 app.configure(function() {
-	[ 'css', 'js', 'images', 'plugin', 'lib' ].forEach(function(dir) {
+	[ 'css', 'js', 'images', 'plugin', 'lib', 'assets' ].forEach(function(dir) {
 		app.use('/' + dir, staticDir(opts.baseDir + dir));
 	});
 });
