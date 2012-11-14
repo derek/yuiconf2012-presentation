@@ -357,19 +357,21 @@ scrollView.render();
           </section>
 
           <section>
-            <h2>No flick</h2>
+            <h2>No drag or flick</h2>
 <pre class="prettyprint" style="font-size:20px;">
 var scrollView = new Y.ScrollView({
 
   srcNode: '#container',
   height: 400,
 
-  flick: false
+  flick: false,
+  drag: false
 
 });
 
 scrollView.render();
 </pre>
+            <p>Now the only interaction available is via the API, useful for carousels.</p>
           </section>
 
           <section>
@@ -667,7 +669,8 @@ scrollView.syncUI();</pre>
             <h1>What's next?</h1>
             <ul>
               <li class="fragment">Get it out of beta</li>
-              <li class="fragment">Improved coverage on functional &amp; unit tests.</li>
+              <li class="fragment">Improved coverage on functional &amp; unit tests</li>
+              <li class="fragment">More examples</li>
               <li class="fragment">Memory optimization on by default</li>
               <li class="fragment">Benchmarking &amp; performance enhancements</li>
               <li class="fragment">CSS animated flicks (<a href="https://github.com/derek/yui3/blob/sv_flick_perf/src/scrollview/js/scrollview-base.js#L744">source</a>, <a href="http://derek.io/~/yui/branch/sv_flick_perf/src/scrollview/tests/manual/svtestbed.html">demo</a>)</li>
