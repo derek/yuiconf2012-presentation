@@ -48,6 +48,10 @@
         background: -webkit-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);*/
       }
 
+      code {
+        color:orange;
+      }
+
 		</style>
 	</head>
 
@@ -582,9 +586,10 @@ scrollview.plug(Y.Plugin.ScrollViewPaginator, {
             <p><strong>Problem</strong>: On render, ScrollView will auto-calculate its min/max bounds and pagination offsets (if applicable).  If widget content changes size, it may modify the container's height or width which will cause it to be out of sync.</p>
             <br />
             <div class="fragment">
-              <p><strong>Solution</strong>: Execute scrollView.syncUI() <strong>anytime</strong> you modify the size of content inside ScrollView.</p>
+              <p><strong>Solution</strong>: Execute <code>scrollView.syncUI()</code>  when content size in ScrollView changes.</p>
               <pre class="prettyprint">// Recalculate container and page dimensions
 scrollView.syncUI();</pre>
+              <p>Also, specify <code>height</code> &amp; <code>width</code> &lt;img&gt; attributes!</p>
             </div>
           </section>
 
