@@ -65,12 +65,11 @@
   					<h1>YUI ScrollView</h1>
   					<h2>Deep Dive</h2>
             <p><small>YUIConf 2012 - Santa Clara, CA</small></p>
-  					<p><small><a href="http://derek.io">Derek Gathright</a></p>
             <img height="250" src="assets/yui-logo.png" />
   				</section>
 
           <section>
-            <h2>This talk</h2>
+            <h2>What we're going to talk about</h2>
             <ul>
               <li>Why ScrollView?</li>
               <li>Demos</li>
@@ -82,20 +81,15 @@
               <li>Tips, tricks, and gotchas</li>
               <li>Roadmap</li>
             </ul>
-            <br />
-            <br />
-            <h3>Primary Audience</h3>
-            <p>Web application developers (desktop and mobile)</p>
           </section>
 
   				<section>
   					<h2>About Me</h2>
   					<ul>
-              <li>Hi!</li>
-              <li>Software Engineer @ Yahoo!</li>
-              <li>YUI for ~18 months, previously Y! Media</li>
-  						<li>Primary contributor for Button &amp; ScrollView components</li>
-              <li>Follow me on Twitter &amp; Github as @derek</li>
+              <li>Hi! I'm <a href="http://derek.io">Derek Gathright</a></li>
+              <li>Software engineer @ Yahoo, YUI</li>
+  						<li>Author of Button, contributor to ScrollView (and other things)</li>
+              <li>Twitter &amp; Github as @derek</li>
   					</ul>
           </section>
 
@@ -107,10 +101,10 @@
             <h1>ScrollView:<br />What &amp; Why?</h1>
             <ul>
             <li>ScrollView provides a <span class="strong">cross-browser</span> scrollable content widget for mobile and desktop browsers</li>
-            <li>Ideal as a primary interface experience</li>
-            <li>Fast, efficient, unit tested</li>
-            <li>Used across Yahoo! in products such as Axis, Livestand, News, Y! Mail, and dozens more...</li>
-            <li>Built on top of a solid foundation, YUI.</li>
+            <li>Great for supplementary widgets, <span class="strong">as well as</span> primary interface components</li>
+            <li>Fast, efficient, <span class="strong">unit tested</span></li>
+            <li>Used across Yahoo! in products such as Axis, Livestand, News, Y! Mail, <span class="strong">and dozens more</span>...</li>
+            <li>Built on top of a <span class="strong">solid foundation</span>, YUI.</li>
           </ul>
           </section>
 
@@ -176,9 +170,9 @@
         "transition"
     ]
 },
+"scrollview-base-ie":{...}, // Conditionally loaded
 "scrollview-scrollbars":{...}, // Y.Plugin.ScrollViewScrollbars
-"scrollview-paginator":{...}, // Y.Plugin.ScrollViewPaginator
-"scrollview-base-ie":{...} // Conditionally loaded</pre>
+"scrollview-paginator":{...} // Y.Plugin.ScrollViewPaginator</pre>
           </section>
 
 					<section>
@@ -209,11 +203,16 @@
               <li>Attributes</li>
               <li>EventTarget (Custom Events)</li>
               <li>Plugability</li>
-							<li>Render Lifecycle Methods</li>
-							<li>Abstract Rendering Methods</li>
+							<li>Lifecycle &amp; Abstract Rendering Methods
+                <ul>
+                  <li>init()</li>
+                  <li>destroy()</li>
+                  <li>renderUI()</li>
+                  <li>bindUI()</li>
+                  <li>syncUI()</li>
+              </li>
               <li>... and more</li>
 						</ul>
-            <br/>
             <br/>
             <p>Docs @ <a href="http://yuilibrary.com/yui/docs/widget/">yuilibrary.com/yui/docs/widget/</a></p>
 					</section>
@@ -270,8 +269,7 @@ YUI({...}).use('myWidget', function (Y) {
 YUI().use('scrollview', function (Y) {
   
   var scrollView = new Y.ScrollView({
-    srcNode: '#someContainer',
-    height: 400
+    srcNode: '#someContainer'
   });
 
   scrollView.render();
@@ -486,7 +484,7 @@ scrollview.pages.next();
 
           <section>
             <h2>Plugin: Scroll Indicator</h2>
-            <p>Introduces <code>Y.Plugin.ScrollViewScrollbars</code>, which adds X &amp; Y scroll indicators to mimic iOS/Android behavior.</p>
+            <p><code>Y.Plugin.ScrollViewScrollbars</code>, which adds X &amp; Y scroll indicators to mimic iOS/Android behavior.</p>
             <p>Already included if you use the <code>scrollview</code> module.  Not included with <code>scrollview-base</code>.</p>
           </section>
 
@@ -499,7 +497,7 @@ scrollview.pages.next();
 
           <section>
             <h1>Unit Testing</h1>
-            <img width="496" src="https://www.evernote.com/shard/s1/sh/2f18c73d-f2fa-4ac2-8648-a5e4bec6c5fb/aa1f96c3a0af7e7cb612694fc0bf3df7/res/5fee0b50-96a2-4d66-a7bc-89342feb9b37/captionater_%7C_quickmeme-20121108-161518.jpg.jpg?resizeSmall&width=832">
+            <img class="fragment" width="496" src="assets/unit_cat.jpg">
           </section>
 
           <section>
@@ -514,7 +512,7 @@ scrollview.pages.next();
           </section>
 
           <section>
-            <h2>Example test</h2>
+            <h2>Testing ScrollView</h2>
 <pre class="prettyprint">"Move on Y should move that distance": function() {
     var Test = this,
         scrollview = renderVerticalScrollview(),
