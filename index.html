@@ -41,6 +41,10 @@
 				color:yellow;
 				font-weight: bold;
 			}
+
+      body {
+        background: #2c2f3f;
+      }
 		</style>
 	</head>
 
@@ -64,6 +68,8 @@
 					<p>
 						<small>Software Engineer @ Yahoo! - YUI Project</small>
 					</p>
+
+          <img height="250" src="assets/yui-logo.png">
 				</section>
 
 
@@ -160,8 +166,7 @@
 },
 "scrollview-scrollbars":{...}, // Y.Plugin.ScrollViewScrollbars
 "scrollview-paginator":{...}, // Y.Plugin.ScrollViewPaginator
-"scrollview-base-ie":{...},
-"scrollview-list":{...}</pre>
+"scrollview-base-ie":{...} // Conditionally loaded</pre>
           </section>
 					<section>
             <h2>Y.Widget</h2>
@@ -431,10 +436,10 @@ scrollView.render();
 <pre class="prettyprint">
 /* scrollview.pages is an instance of 
    the ScrollViewPaginator plugin */
-scrollview.pages.set("index", 3);
-scrollview.pages.scrollTo(3, 500, "ease-in");
-scrollview.pages.next();
+scrollview.pages.set("index", 2);
 scrollview.pages.get("total");
+scrollview.pages.scrollToIndex(3, 500, "ease-in");
+scrollview.pages.next();
 </pre>
           </section>
 
@@ -530,21 +535,11 @@ scrollview.pages.get("total");
               <pre class="prettyprint">
 scrollview.plug(Y.Plugin.ScrollViewPaginator, {
     selector: ">li",
-    _optimizeMemory: true
+    _optimizeMemory: true // <-----------
 });
               </pre>
             </div>
             
-          </section>
-          <section>
-            <h2>How?</h2>
-<pre class="prettyprint">var scrollview = new Y.ScrollView({...});
-  
-scrollview.plug(Y.Plugin.ScrollViewPaginator, {
-  selector: ">li",
-  _optimizeMemory: true // <-----------
-});
-</pre>
           </section>
           <section>
             <h2>Demo</h2>
@@ -574,7 +569,7 @@ scrollView.syncUI();</pre>
             <p><strong>Problem</strong>: My target audience requires a right-to-left layout. How can I hack ScrollView to support that?</p>
             <br />
             <div class="fragment">
-              <p><strong>Solution</strong>: You don't! As of YUI 3.7, ScrollView and its paginator plugin natively support RTL layouts.</p>
+              <p><strong>Solution</strong>: You don't have to. As of YUI 3.7, ScrollView and its paginator plugin natively support RTL layouts.</p>
             </div>
           </section>
         </section>
@@ -589,27 +584,25 @@ scrollView.syncUI();</pre>
             <br />
             <div class="fragment">
               <p><strong>Solution</strong>: No you don't.  You want a ScrollView that supports scrolling on the X and Y axes, which ScrollView now supports.</p>
-<pre class="prettyprint">new Y.ScrollView({
-  srcNode:'#container',
-  height:'400',
-  axis: 'xy' // <---------
-  plugins: [{
-    fn:Y.Plugin.ScrollViewPaginator, 
-    cfg:{
-      selector:'>li',
-      axis: 'x' // <---------
-    }}]
-}).render();
-</pre>
             </div>
           </section>
           <section>
             <h2>Dual-axis continuous</h2>
             <iframe height="404" width="404" src="demo-dual.html"></iframe>
+<pre class="prettyprint">new Y.ScrollView({
+  srcNode:'#container',
+  axis: 'xy'
+}).render();
+</pre>
           </section>
           <section>
             <h2>Dual-axis paginated</h2>
             <iframe height="404" width="404" src="demo-dual-paginated.html"></iframe>
+<pre class="prettyprint">scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+  selector: ">li",
+  axis:"x"
+});
+</pre>
           </section>
           <section>
             <h2>Dual-axis paginated vertical</h2>
