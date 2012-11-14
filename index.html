@@ -16,8 +16,8 @@
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/styles/sunburst.css">
-		<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+		<link rel="stylesheet" href="assets/sunburst.css">
+		<script type="text/javascript" src="assets/prettify.js"></script>
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -100,17 +100,17 @@
           <section>
             <h1>ScrollView:<br />What &amp; Why?</h1>
             <ul>
-            <li>ScrollView provides a <span class="strong">cross-browser</span> scrollable content widget for mobile and desktop browsers</li>
-            <li>Great for supplementary widgets, <span class="strong">as well as</span> primary interface components</li>
-            <li>Fast, efficient, <span class="strong">unit tested</span></li>
-            <li>Used across Yahoo! in products such as Axis, Livestand, News, Y! Mail, <span class="strong">and dozens more</span>...</li>
-            <li>Built on top of a <span class="strong">solid foundation</span>, YUI.</li>
-          </ul>
+              <li>ScrollView provides a <span class="strong">cross-browser</span> scrollable content widget for mobile and desktop browsers</li>
+              <li>Great for supplementary widgets (carousels), <span class="strong">as well as</span> primary interface components</li>
+              <li>Fast, efficient, <span class="strong">unit tested</span></li>
+              <li>Used across Yahoo! in products such as Axis, Livestand, News, Y! Mail, <span class="strong">and dozens more</span>...</li>
+              <li>Built on top of a <span class="strong">solid foundation</span>, YUI.</li>
+            </ul>
           </section>
 
   				<section>
               <h2>Supported Browsers</h2>
-              <img border="0" width="500" src="http://edudemic.com/wp-content/uploads/2010/12/browser_logos-256.png">
+              <img border="0" width="500" src="assets/browser_logos-256.png">
               <p>Everything! Modern browsers, legacy (IE6+), <br> mobile (Safari, Android), etc.</p>
           </section>
 
@@ -393,7 +393,7 @@ scrollView.render();
           <section>
             <h2>Bézier Curves</h2>
             <p>CSS3 Transitions add support for cubic curves. Normalized by YUI's <code>transition</code> module. P0 is (0,0) and P3 is (1,1), so you define P1, P2, &amp; duration</p>
-            <img width="300" src="http://upload.wikimedia.org/wikipedia/commons/f/ff/Bezier_3_big.gif">
+            <img width="300" src="assets/bezier.gif">
 <pre class="prettyprint" style="font-size:20px;">
 // Examples
 (0.0, 0.0, 1.0, 1.0) // linear
@@ -552,7 +552,7 @@ scrollview.pages.next();
 
           <section>
             <h1>Tips, Tricks, &amp; Q's</h1>
-            <img height="220" src="http://www.chiropracticlifeblog.com/wp-content/uploads/2009/06/one-way-sign2.jpg">
+            <img height="220" src="assets/thisway.jpg">
           </section>
 
           <section>
@@ -596,6 +596,15 @@ scrollView.syncUI();</pre>
           </section>
 
           <section>
+            <h2>Accessibility</h2>
+            <p><strong>Problem</strong>: How can I make ScrollView content accessible to screen readers?</p>
+            <br />
+            <div class="fragment">
+              <p><strong>Solution</strong>: You don't have to do anything.  ScrollView is a visual-only interface enhancement and doesn't modify the underlying DOM structure.</p>
+            </div>
+          </section>
+
+          <section>
             <h2>Nested ScrollViews</h2>
             <p><strong>Problem</strong>: I want a ScrollView of ScrollViews</p>
             <br />
@@ -634,10 +643,9 @@ scrollView.syncUI();</pre>
             <ul>
               <li>Get familiar with Chrome Dev Tools, Web Inspector, Firebug, etc.</li>
               <li>Use Chrome to live edit code and export your ScrollView instance as a global
-                <pre>
+                <pre class="prettyprint">
   var scrollView = new Y.ScrollView({...});
-  window.sv = scrollView; // Globalize it
-                </pre>
+  window.sv = scrollView; // Globalize it!</pre>
                 Now you can interact with ScrollView from the console.
               </li>
               <li>Interesting stuff: <code>get('scroll{X/Y}')</code>, <code>_minScroll{X/Y}</code>, <code>_maxScroll{X/Y}</code>, <code>_isOutOfBounds()</code>, <code>pages._pageDims</code></li>
@@ -658,11 +666,12 @@ scrollView.syncUI();</pre>
           <section>
             <h1>What's next?</h1>
             <ul>
-              <li class="">Get it out of beta</li>
-              <li class="">Improved coverage on functional &amp; unit tests.</li>
-              <li class="">Memory optimization on by default</li>
-              <li class="">CSS animated flicks (<a href="https://github.com/derek/yui3/blob/sv_flick_perf/src/scrollview/js/scrollview-base.js#L744">source</a>, <a href="http://derek.io/~/yui/branch/sv_flick_perf/src/scrollview/tests/manual/svtestbed.html">demo</a>)</li>
-              <li class=""><code>webkit-overflow-scrolling:touch</code> ?</li>
+              <li class="fragment">Get it out of beta</li>
+              <li class="fragment">Improved coverage on functional &amp; unit tests.</li>
+              <li class="fragment">Memory optimization on by default</li>
+              <li class="fragment">Benchmarking &amp; performance enhancements</li>
+              <li class="fragment">CSS animated flicks (<a href="https://github.com/derek/yui3/blob/sv_flick_perf/src/scrollview/js/scrollview-base.js#L744">source</a>, <a href="http://derek.io/~/yui/branch/sv_flick_perf/src/scrollview/tests/manual/svtestbed.html">demo</a>)</li>
+              <li class="fragment"><code>webkit-overflow-scrolling:touch</code> ?</li>
             </ul>
           </section>
 
@@ -697,7 +706,7 @@ scrollView.syncUI();</pre>
 <br />
 					<p>ScrollView documentation <br /> <a href="http://yuilibrary.com/yui/docs/scrollview/">yuilibrary.com/yui/docs/scrollview/</a></p>
 <br />
-					<p>Slides <br /> <a href="https://github.com/derek/yuiconf2012-presentation">github.com/derek/yuiconf2012-presentation</a></p>
+					<p>Slides <br /> html: <a href="http://derek.io/~/yui/yuiconf2012-presentation/">derek.io/~/yui/yuiconf2012-presentation/</a> <br /> repo: <a href="https://github.com/derek/yuiconf2012-presentation">github.com/derek/yuiconf2012-presentation</a></p>
 <br />
 					<p>Holla! <br /> <a href="http://twitter.com/derek">@derek</a></p>
         </section>
