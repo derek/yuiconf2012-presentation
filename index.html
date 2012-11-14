@@ -740,8 +740,8 @@ scrollView.syncUI();</pre>
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-          // { src: '/socket.io/socket.io.js', async: true },
-          // { src: 'plugin/notes-server/client.js', async: true }
+          { src: '/socket.io/socket.io.js', async: true },
+          { src: 'plugin/notes-server/client.js', async: true }
 				]
 			});
 
